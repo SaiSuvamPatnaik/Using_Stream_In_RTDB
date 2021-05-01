@@ -35,6 +35,8 @@ dependencies:
   firebase_core:
   provider:
   cloud_firestore:
+  flutter_slidable:
+
 
 
 dev_dependencies:

@@ -2,7 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:streaminrtdb/Screen/brewlist.dart';
-import 'package:streaminrtdb/Screen/trialnew.dart';
+
 class trial extends StatefulWidget {
   @override
   _trialState createState() => _trialState();
@@ -35,16 +35,7 @@ class _trialState extends State<trial> {
                 Icons.settings,
                 size: 30,
               )),
-          IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => trialnew()));
-              },
-              icon: Icon(
-                Icons.next_plan,
-                size: 30,
-              )),
+
           SizedBox(width: 10,)
         ],
         centerTitle: true,
@@ -210,15 +201,9 @@ class _trialState extends State<trial> {
                           color: Colors.transparent,
                           child: GestureDetector(
                             onTap: () {
-                              ref.once().then((DataSnapshot snapshot) {
-                                List item = [];
-                                snapshot.value.forEach((index, data) => item.add({"key": index, ...data}));
+                              setState(() {
+                                brewlist(neededsort: neededsort);
 
-                                for (int i=0;i<item.length;i++){
-                                  if (neededname==item[i]["Name"]){
-                                    ref.child(item[i]["key"]).remove();
-                                  }
-                                }
                               });
 
                             },
@@ -226,7 +211,7 @@ class _trialState extends State<trial> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  'DELETE DATA',
+                                  'SORT DATA',
                                   style: TextStyle(
                                     fontSize: 15,
                                     color: Colors.blueAccent,
@@ -248,45 +233,7 @@ class _trialState extends State<trial> {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20,10,0,0),
-                  child: Container(
-                    height: 40.0,
-                    width: 120,
-                    child: Material(
-                      color: Colors.transparent,
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            brewlist(neededsort: neededsort);
 
-                          });
-
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'UPDATE DATA',
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.blueAccent,
-                                fontWeight: FontWeight.bold,),
-                            ),
-
-                          ],
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            color: Colors.black,
-                            style: BorderStyle.solid,
-                            width: 1.0),
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(15.0)),
-                  ),
-                ),
 
               ],
             ),
