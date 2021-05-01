@@ -1,0 +1,6 @@
+package com.example.streaminrtdb
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
